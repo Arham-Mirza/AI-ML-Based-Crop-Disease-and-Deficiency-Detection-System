@@ -5,7 +5,7 @@ This project focuses on developing a machine learning model to streamline the cl
 Similarly, despite the dry climate, in 2022, the United Arab Emirates was amongst the top producers of wheat (by attainable yield) in the world. Figure 1.1a shows the UAE’s attainable yield of wheat versus the United States, United Kingdom, Pakistan, and World averages. [2]
 
 
-<img width="919" height="329" alt="image" src="https://github.com/user-attachments/assets/217fc39b-68e0-429c-81ec-521c172f4bf5" />
+<img width="250" height="200" alt="image" src="https://github.com/user-attachments/assets/217fc39b-68e0-429c-81ec-521c172f4bf5" />
 
 
 This project was deemed relevant to the country and thus selected in an effort to aid farmers in detecting healthy versus rotten fruits or vegetables. 
