@@ -1,31 +1,124 @@
-# AI-ML-Based-Crop-Disease-and-Deficiency-Detection-System
-The project develops a machine learning model to classify fruits and vegetables as healthy or rotten using image data. It features a user-friendly web app integrated with weather data to suggest seasonal crops. The system undergoes full development, training, testing, and evaluation to ensure accuracy and reliability.
-1.1 PROJECT SELECTION
-This project focuses on developing a machine learning model to streamline the classification process between healthy or rotten fruits and vegetables. To understand the reason for this project’s selection, some context is necessary. In 2024, the US Department of Agriculture (USDA) found that, from 1961 to 2020, the global agricultural output had quadrupled, while the population increased by about 2.6 times [1]. This surge in agricultural output meant that the industry saw larger crop-fields, which would lead to aggressive quality control requirements that are inherently difficult to meet. During the pandemic, there was a significant food shortage due to disruptions in supply chains, labor shortages, and increased demand for staple goods. This highlighted the critical need for efficient food management systems to reduce waste and ensure the availability of healthy produce.
-Similarly, despite the dry climate, in 2022, the United Arab Emirates was amongst the top producers of wheat (by attainable yield) in the world. Figure 1.1a shows the UAE’s attainable yield of wheat versus the United States, United Kingdom, Pakistan, and World averages. [2]
+An AI-powered web application that classifies fruits and vegetables as healthy or rotten using deep learning, and pairs the diagnosis with live weather data to recommend which crops are currently in season.
+
+**📋 Table of Contents**
+Overview
+Key Features
+Technology Stack
+System Architecture
+Machine Learning Details
+Installation Guide
+Usage Instructions
+Project Structure
+Results & Performance
+Future Improvements
+Author / Credits
+**Overview**
+
+Global agricultural output has quadrupled since 1961, but manual quality inspection hasn't scaled with it. Traditional harvest inspection is slow, labor-intensive, and highly dependent on an inspector's individual experience — leaving plenty of room for costly human error.
+
+CropCare solves this by putting a trained computer vision model behind a simple web interface. Farmers or agricultural workers upload a photo of a fruit or vegetable, and the system tells them — in seconds — whether it's healthy or rotten, along with a confidence score. It also pulls real-time weather data to suggest which crops are best suited to current conditions.
+
+The goal is to give both smallholder farmers and larger agricultural operations a fast, low-cost, accessible tool for quality control — reducing food waste, cutting labor costs, and improving crop management decisions, without requiring any specialized technical knowledge to operate.
+
+**Real-world applications:**
+
+On-farm produce quality screening before distribution
+Reducing food waste through early detection of spoilage
+Supporting data-driven crop planning using weather-informed suggestions
+Providing an accessible tool for regions with limited access to agricultural extension services
+**Key Features**
+🖼️ Image-Based Classification — Upload a photo and get an instant healthy/rotten classification
+🎯 Confidence Scoring — Every prediction is returned with a confidence percentage and top alternative predictions
+🌦️ Weather-Aware Recommendations — Integrates live weather data to suggest in-season crops
+⚡ Real-Time Processing — Results delivered in seconds, suitable for field use
+📱 Responsive Web Interface — Works across desktop, tablet, and mobile devices
+🗂️ Result History & Storage — Classification results, images, and metadata are stored for future reference
+🔌 API-First Design — RESTful backend endpoints allow integration with external agricultural management systems
+🧩 Modular Architecture — Clean separation between data processing, ML inference, and UI layers for easy extension
+🛡️ Graceful Error Handling — Clear feedback for unsupported formats or low-quality uploads
+
+**Technology Stack**
+**Category	**                     ** Technologies**
+Frontend	                        React.js
+Backend	                          Flask / Django (Python)
+Machine Learning	                TensorFlow, PyTorch, CNN (Convolutional Neural Network)
+Pretrained Models	                MobileNetV2, ResNet50 (Transfer Learning)
+Image Processing	                OpenCV
+Database	                        MySQL (structured data & logs), MongoDB (image metadata)
+External APIs	                    OpenWeatherMap API
+Model Training Environment	      Google Colab (GPU/TPU-accelerated)
+Deployment	                      AWS, Google Cloud Platform
+Model Optimization	              TensorFlow Lite / ONNX (edge inference)
+Testing	                          Selenium (UI), Postman (API), Jupyter Notebooks (model validation)
+Version Control	                  Git & GitHub
+IDE	                              Visual Studio Code
+
+User uploads image
+        │
+        ▼
+┌───────────────────┐
+│  User Interface    │  React web app — image upload, results display, weather dashboard
+└─────────┬──────────┘
+          │ HTTP Request
+          ▼
+┌───────────────────┐
+│  Application Layer │  Flask/Django backend — API endpoints, auth, business logic
+└─────────┬──────────┘
+          │
+          ▼
+┌───────────────────┐
+│  Service Layer     │  Image preprocessing — filtering, resizing, augmentation
+└─────────┬──────────┘
+          │
+          ▼
+┌───────────────────┐
+│  ML Inference Layer│  CNN model (transfer learning) — binary classification
+└─────────┬──────────┘
+          │
+          ▼
+┌───────────────────┐         ┌──────────────────┐
+│  Weather Layer      │◄──────┤  OpenWeatherMap API │
+└─────────┬──────────┘         └──────────────────┘
+          │
+          ▼
+┌───────────────────┐
+│  Data Layer         │  MySQL / MongoDB — image storage, results, user history
+└─────────┬──────────┘
+          │
+          ▼
+   Results + Suggestions
+      returned to user
 
 
-<img width="500" height="280" alt="image" src="https://github.com/user-attachments/assets/217fc39b-68e0-429c-81ec-521c172f4bf5" />
+User uploads an image via the web interface.
+Backend validates and stores the image.
+Image is preprocessed (resized to 224×224, normalized, augmented if needed).
+The CNN model runs inference and returns a classification with a confidence score.
+The backend fetches current weather data in parallel.
+Classification results and weather-based crop suggestions are combined and stored.
+Results are returned to the user through the web dashboard.
+Machine Learning Details
+Dataset
+Labeled image dataset covering multiple crop types, each split into Healthy and Rotten classes (e.g., Apple, Banana, Bell Pepper, Carrot, Cucumber, Orange, Potato, Tomato).
 
+**Preprocessing Pipeline**
+Filtering — noise and artifact removal to improve image quality
+Resizing & Normalization — standardized to 224×224 pixels, pixel values scaled to [0, 1]
+Data Augmentation — rotation, flipping, and zooming applied to increase dataset diversity and reduce overfitting
+**Model Architecture**
+Base Model: Transfer learning using pretrained MobileNetV2 or ResNet50
+Custom Layers: Additional dense layers with dropout for fine-tuning on the crop dataset
+Output Layer: Sigmoid activation for binary classification (healthy vs. rotten)
+**Training Approach**
+Fine-tuning of upper layers on top of frozen pretrained base layers
+Hyperparameter tuning (learning rate, batch size) using a validation set
+Optimization techniques: early stopping, learning rate decay, and model checkpointing to prevent overfitting
+**Evaluation Metrics**
+Accuracy, Precision, Recall, F1-score, and confusion matrix analysis were used to guide model refinement.
+**Target Performance**
+Target classification accuracy: ≥ 95%
+Target inference/response time: a few seconds per image, suitable for real-time field use
 
-This project was deemed relevant to the country and thus selected in an effort to aid farmers in detecting healthy versus rotten fruits or vegetables. 
+**System Architecture**
 
-1.2 PROJECT PURPOSE
-The purpose of this project is to create a reliable and accurate classification model, that can determine whether the harvested fruits or vegetables are healthy. The project will also be capable of referencing the weather, which will in turn allow it to give suitable suggestions to which crops are in season for the consumer. 
-
-1.3 PROJECT OBJECTIVES
-•	Develop a machine learning model capable of accurately classifying vegetables and fruits as healthy or rotten.
-•	Design a user-friendly interface for both laymen and agricultural workers to interact with the system with ease.
-•	Evaluate the system's performance in controlled environment.
-
-1.4 PROJECT SCOPE
-The project scope includes:
-•	Processing of vegetable and fruit images.
-•	Training the ML model.
-•	Developing a web application with intuitive UI.
-•	Deploying the model on the web application.
-•	Integrating a weather solution to the web application, allowing the model to reference it in order to give suggestions to the user.
-•	Documentation, evaluation and reporting of results.
-
-1.5 PROJECT OVERVIEW
-This project involves the development of a machine learning model that uses image data to classify the health status of vegetables and fruits. The project will follow a structured development lifecycle, including research, analysis, design, implementation, and testing, followed by an evaluation.
+CropCare follows a layered architecture, taking an uploaded image through preprocessing, inference, and enrichment before returning a result to the user.
