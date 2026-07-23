@@ -118,6 +118,8 @@ Accuracy, Precision, Recall, F1-score, and confusion matrix analysis were used t
 **Target Performance**
 Target classification accuracy: ≥ 95%
 Target inference/response time: a few seconds per image, suitable for real-time field use
+<img width="1200" height="400" alt="training_history" src="https://github.com/user-attachments/assets/6c520876-a2ff-45be-a4c6-0403cc9af2d1" />
+
 
 **System Architecture**
 
